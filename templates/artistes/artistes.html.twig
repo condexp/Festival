@@ -1,27 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArtistesController!
+{% block title %}Artistes
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+	<div
+		class="text-center">
 
-	<div class="example-wrapper">
-		<h1>Hello
-			{{ controller_name }}! ✅</h1>
 
-		This friendly message is coming from:
-		<ul></ul>
-	</div>
-{% endblock %}
+		{# Liste des categories  {{ dump(categorys) }} #}
+
+		{% for category in categorys %}
+
+
+			{% if  category .id == 1 %}
+				<button type="button" class="btn btn-outline-primary">{{ category }}</button>
+
+			{% endif %}
+
+
+			{% if category .id == 2 %}
+				<button type="button" class="btn btn-outline-secondary">{{ category }}</button>
+
+			{% endif %}
+
+			{% if category .id == 3 %}
+				<button type="button" class="btn btn-outline-success">{{ category }}</button>
+
+			{% endif %}
+			{% if category .id == 4 %}
+				<button type="button" class="btn btn-outline-info">{{ category }}</button>
+
+			{% endif %}
+			{% if category .id == 5 %}
+				<button type="button" class="btn btn-outline-warning">{{ category }}</button>
+
+			{% endif %}
+
+		{% endfor %}
+
+
+		<div class="row my-5">
+			{%  for i in 1..12 %}
+				<div class="col-4">
+
+					<div class="card border-primary mb-3">
+
+						<div class="card-header">Artiste N °:
+							{{ i }}
+						</div>
+						<div class="card-body">
+							<h4 class="card-title">Primary card title</h4>
+							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	{% endblock %}

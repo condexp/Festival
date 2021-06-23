@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ArtistesController extends AbstractController
 {
@@ -17,4 +18,19 @@ class ArtistesController extends AbstractController
             'controller_name' => 'ArtistesController',
         ]);
     }
+
+
+    /**
+     * @Route("/artistes", name="app_artistes")
+     */
+    public function findAllCategory(CategoryRepository $categoryRepository): Response
+    {
+        $category = $categoryRepository->findAll();
+        //dd($posts);
+
+        return $this->render('artistes/artistes.html.twig', [
+            'categorys' => $category,
+        ]);
+    }
+
 }
