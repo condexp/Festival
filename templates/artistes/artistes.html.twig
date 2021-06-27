@@ -12,47 +12,32 @@
 
 		{% for category in categorys %}
 
-
-			{% if  category .id == 1 %}
-				<button type="button" class="btn btn-outline-primary">{{ category }}</button>
-
-			{% endif %}
-
-
-			{% if category .id == 2 %}
-				<button type="button" class="btn btn-outline-secondary">{{ category }}</button>
-
-			{% endif %}
-
-			{% if category .id == 3 %}
-				<button type="button" class="btn btn-outline-success">{{ category }}</button>
-
-			{% endif %}
-			{% if category .id == 4 %}
-				<button type="button" class="btn btn-outline-info">{{ category }}</button>
-
-			{% endif %}
-			{% if category .id == 5 %}
-				<button type="button" class="btn btn-outline-warning">{{ category }}</button>
-
-			{% endif %}
+			<a href="{{ path('app_artistes') }}" role="button" class="btn btn-outline-{{ category.color }}">{{ category.name }}</a>
 
 		{% endfor %}
 
-
 		<div class="row my-5">
-			{%  for i in 1..12 %}
+			{%  for artist in artistes %}
 				<div class="col-4">
 
-					<div class="card border-primary mb-3">
+					<div class="card border-{{ artist.color }} mb-3">
 
-						<div class="card-header">Artiste N °:
-							{{ i }}
+						<div class="card-header text-end">
+
+
+							<span class="badge rounded-pill bg-{{ artist.color }}">{{artist.concert ? 'concert' : 'concert de rue' }}</span>
 						</div>
+
 						<div class="card-body">
-							<h4 class="card-title">Primary card title</h4>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+
+							<h4 class="card-title">
+								{{ artist.name }}</h4>
+							<p class="card-text">{{ artist.description }}</p>
+							<a href="#" class="card-link">Decouvir l'artiste</a>
+
 						</div>
+
+
 					</div>
 				</div>
 			{% endfor %}

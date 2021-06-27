@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,6 +24,26 @@ class Category
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Artist::class, mappedBy="category")
+     */
+    private $artists;
+
+
+    private $color;
+
+
+    public function __construct()
+    {
+        $this->artists = new ArrayCollection();
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -39,8 +61,48 @@ class Category
         return $this;
     }
 
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+
+
     public function __toString()
     {
         return $this->name;
+    }
+
+    /**
+     * @return Collection|Artist[]
+     */
+    public function getArtists(): Collection
+    {
+        return $this->artists;
+    }
+
+    public function addArtist(Artist $artist): self
+    {
+        if (!$this->artists->contains($artist)) {
+            $this->artists[] = $artist;
+            $artist->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArtist(Artist $artist): self
+    {
+        if ($this->artists->removeElement($artist)) {
+            // set the owning side to null (unless already changed)
+            if ($artist->getCategory() === $this) {
+                $artist->setCategory(null);
+            }
+        }
+
+        return $this;
     }
 }
