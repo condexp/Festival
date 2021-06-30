@@ -57,6 +57,7 @@ class Artist
         return $this->id;
     }
 
+
     public function getName(): ?string
     {
         return $this->name;
@@ -91,6 +92,10 @@ class Artist
         $this->concert = $concert;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->name;
     }
 
     public function getCategory(): ?Category

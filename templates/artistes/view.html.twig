@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Artistes
+{% endblock %}
+
+{% block body %}
+	<div class="container my-5">
+		<div class="row my-5">
+			<div class="card border-{{ artist.color }} mb-3">
+				<div class="card-body ">
+					<h4 class="card-title text-center">{{ artist.name }}</h4>
+					<p class="card-text">{{ artist.description }}</p>
+				</div>
+			</div>
+			<div class="card-body text-center ">
+				<a href="{{ path ('app_artistes') }}" class="card-link">Retour à la liste des artistes
+				</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

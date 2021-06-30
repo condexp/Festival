@@ -14,40 +14,31 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
 
-       $faker = Factory::create();
-       
-       $categories =[ "Melodique","Industrielle","Groovy","Deep","Detroit"];
+        $faker = Factory::create();
 
+        $categories = ["Melodique", "Industrielle", "Groovy", "Deep", "Detroit"];
 
-  
-
-       for ($i = 0; $i <= 4; $i++) {
+        for ($i = 0; $i <= 4; $i++) {
             // Categories
             $category = new Category();
             $category->setName($categories[$i]);
-            
-          
             $manager->persist($category);
+
+            for ($j = 0; $j < 10; $j++) {
+                $artist = new Artist();
+                $artist->setName($faker->words(2, true))
+                    ->setDescription($faker->sentences(100, true))
+                    ->setConcert($faker->numberBetween(0, 1))
+                    ->setCategory($category);
+
+
+                $manager->persist($artist);
+            }
+
+
+
+
             $manager->flush();
-
-       } 
-
-       for ($i = 0; $i < 20; $i++) {
-        $artist = new Artist();
-        $artist ->setName($faker->words(2, true))
-        ->setDescription($faker->sentences(3, true))
-        ->setConcert($faker->numberBetween(0, 1))
-        ;
-
-        
-
-        //->setCategory($faker->getReference('Category'.rand(0,1)))
-        $manager->persist($artist);
-       }
-
-       
-       
-        $manager->flush();
-       
+        }
     }
 }

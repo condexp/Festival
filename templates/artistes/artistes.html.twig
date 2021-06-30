@@ -4,42 +4,44 @@
 {% endblock %}
 
 {% block body %}
-	<div
-		class="text-center">
+	<div class="text-center">
 
 
-		{# Liste des categories  {{ dump(categorys) }} #}
+		{% for category in categories %}
 
-		{% for category in categorys %}
+			<a href="{{ path ('app_artist_category',{"id":category.id}) }}" role="button" class="btn btn-outline-{{ category.color }}">{{ category.name }}</a>
 
-			<a href="{{ path('app_artistes') }}" role="button" class="btn btn-outline-{{ category.color }}">{{ category.name }}</a>
-
+			{# {{ dump(category.id) }}#}
 		{% endfor %}
+		<div class="container my-5">
+			<div class="row my-5">
+				{%  for artist in artistes %}
+					<div class="col-4">
 
-		<div class="row my-5">
-			{%  for artist in artistes %}
-				<div class="col-4">
+						<div class="card border-{{ artist.color }} mb-3">
 
-					<div class="card border-{{ artist.color }} mb-3">
-
-						<div class="card-header text-end">
+							<div class="card-header align-self-end">
 
 
-							<span class="badge rounded-pill bg-{{ artist.color }}">{{artist.concert ? 'concert' : 'concert de rue' }}</span>
+								<span class="badge rounded-pill bg-{{ artist.color }}">{{artist.concert ? 'concert' : 'music de rue' }}</span>
+							</div>
+
+							<div class="card-body">
+
+								<h4 class="card-title">{{ artist.name}}</h4>
+
+								<p class="card-text">{{ artist.description | u.truncate(70, '...') }}</p>
+
+								<a href="{{ path ('app_artist_view',{"id":artist.id}) }}" class="card-link">Decouvir l'artiste</a>
+
+							</div>
+
+
 						</div>
-
-						<div class="card-body">
-
-							<h4 class="card-title">
-								{{ artist.name }}</h4>
-							<p class="card-text">{{ artist.description }}</p>
-							<a href="#" class="card-link">Decouvir l'artiste</a>
-
-						</div>
-
-
 					</div>
-				</div>
-			{% endfor %}
+
+
+				{% endfor %}
+			</div>
 		</div>
 	{% endblock %}
