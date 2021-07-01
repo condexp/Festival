@@ -105,7 +105,7 @@ class ArtistesController extends AbstractController
     /**
      * @Route("/artist/view/{id}", methods={"GET"}, name="app_artist_view")
      */
-    public function ficheArtiste($id, CategoryRepository $categoryRepository, ArtistRepository $artistRepository): Response
+    public function ficheArtiste($id, ArtistRepository $artistRepository): Response
     {
 
         $artist = $artistRepository->findOneBy(['id' => $id]);
@@ -120,13 +120,24 @@ class ArtistesController extends AbstractController
         $artist->setColor($categorycolor[$artist->getCategory()->getName()]);
 
 
-       
+
 
 
         //dd($posts);
         return $this->render('artistes/view.html.twig', [
-          
+
             'artist' => $artist
+        ]);
+    }
+
+    /**
+     * @Route("/agenda", name="app_agenda_enconcert")
+     */
+    public function listArtistesenconcert(ArtistRepository $artistRepository): Response
+    {
+        $lesartistenconcert = $artistRepository->findArtistByConcert();
+        return $this->render('agenda/agenda.html.twig', [
+            'lesconcerts' => $lesartistenconcert
         ]);
     }
 }

@@ -23,7 +23,7 @@ class Artist
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -38,6 +38,16 @@ class Artist
     private $category;
 
     private $color;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $dateconcert;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $plagehoraire;
 
     public function getColor(): ?string
     {
@@ -106,6 +116,30 @@ class Artist
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getDateconcert(): ?string
+    {
+        return $this->dateconcert;
+    }
+
+    public function setDateconcert(?string $dateconcert): self
+    {
+        $this->dateconcert = $dateconcert;
+
+        return $this;
+    }
+
+    public function getPlagehoraire(): ?string
+    {
+        return $this->plagehoraire;
+    }
+
+    public function setPlagehoraire(?string $plagehoraire): self
+    {
+        $this->plagehoraire = $plagehoraire;
 
         return $this;
     }

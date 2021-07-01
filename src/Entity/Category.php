@@ -33,6 +33,9 @@ class Category
     private $color;
 
 
+
+
+
     public function __construct()
     {
         $this->artists = new ArrayCollection();

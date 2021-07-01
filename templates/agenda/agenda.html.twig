@@ -4,46 +4,46 @@
 {% endblock %}
 
 {% block body %}
-	<style>
-		.example-wrapper {
-			margin: 1em auto;
-			max-width: 800px;
-			width: 95%;
-			font: 18px / 1.5 sans-serif;
-		}
-		.example-wrapper code {
-			background: #F5F5F5;
-			padding: 2px 6px;
-		}
-	</style>
+<style>
+	.example-wrapper {
+		margin: 1em auto;
+		max-width: 800px;
+		width: 95%;
+		font: 18px / 1.5 sans-serif;
+	}
+	.example-wrapper code {
+		background: #F5F5F5;
+		padding: 2px 6px;
+	}
+</style>
 
-	<div class="example-wrapper">
+<div class="example-wrapper">
 
-		<table class="table table-hover">
-			<thead>
-				<tr class="table-success" style="border: 1px solid white" hidden>
-					<th scope="col">Date</th>
-					<th scope="col">Plage Horaire</th>
-					<th scope="col">Nom Artistes</th>
-					<th scope="col" class="table-primary">Réservations</th>
+	<table class="table table-hover">
+		<thead>
+			<tr class="table-success" style="border: 1px solid white" hidden>
+				<th scope="col">Date</th>
+				<th scope="col">Plage Horaire</th>
+				<th scope="col">Nom Artistes</th>
+				<th scope="col" class="table-primary">Réservations</th>
+			</tr>
+		</thead>
+		{%  for artistconcert in lesconcerts %}
+			<tbody>
+
+				<tr class="table-active" style="border: 1px solid white">
+					<th scope="row">{{ artistconcert.dateconcert }}</th>
+					<td>{{ artistconcert.plagehoraire }}</td>
+					<td>{{ artistconcert.name }}
+					</td>
+					<td class="table-primary" style="text-align:center">
+						{% if app.user %}
+							<a href="#" class="card-link">Reservez une place</a>
+						{% endif %}
+					</td>
 				</tr>
-			</thead>
-			{% for i in 0..10 %}
-				<tbody>
+			</tbody>
+		</td>
+	</tr>
 
-					<tr class="table-active" style="border: 1px solid white">
-						<th scope="row">20/08/2021</th>
-						<td>16H-18H</td>
-						<td>Demo demo : *
-							{{ i }}
-						</td>
-						<td class="table-primary" style="text-align:center">Reservez une place
-						</td>
-					</tr>
-
-				</tbody>
-			{% endfor %}
-		</table>
-
-	</div>
-{% endblock %}
+</tbody>{% endfor %}</table></div>{% endblock %}

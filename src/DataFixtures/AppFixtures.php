@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
             for ($j = 0; $j < 10; $j++) {
                 $artist = new Artist();
                 $artist->setName($faker->words(2, true))
-                    ->setDescription($faker->sentences(100, true))
+                    ->setDescription($faker->sentences(10, true))
                     ->setConcert($faker->numberBetween(0, 1))
                     ->setCategory($category);
 

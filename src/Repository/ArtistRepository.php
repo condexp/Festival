@@ -20,22 +20,20 @@ class ArtistRepository extends ServiceEntityRepository
         parent::__construct($registry, Artist::class);
     }
 
-    // Requete de sql de selection des artistes par category
-    //SELECT * FROM category c INNER JOIN artist a ON c.id = a.id WHERE c.name = 'Melodique' 
-    public function findByNameCategory($name): array
+    public function findArtistByConcert(int $nb = 9): array
     {
         $entityManager = $this->getEntityManager();
+
         $query = $entityManager->createQuery(
-            'SELECT  a.name, a.description, a.id ,c.id
+            'SELECT a.dateconcert , a.plagehoraire, a.name
             FROM App\Entity\Artist a
-            INNER JOIN
-            App\Entity\Category c
-             
-            WHERE  c.name = :name'
+            WHERE a.concert = 1
+            '
         )
-            ->setParameter('name', $name);
+            ->setMaxResults($nb);
         return $query->getResult();
     }
+
 
     /* 
     public function findByNameCategory(): array
