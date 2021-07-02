@@ -32,21 +32,15 @@ class ArtistesController extends AbstractController
 
         foreach ($categories as $categorie) {
             $categorie->setColor($categorycolor[$categorie->getName()]);
-
             //dd($categorie);
-
         }
 
         $artists = $artistRepository->findAll();
-
         //dd($posts);
-
         foreach ($artists as $artist) {
 
             $categoryName = $artist->getCategory() ? $artist->getCategory()->getName() : null;
-
             $color = $categoryName ? $categorycolor[$categoryName] : 'dark';
-
             $artist->setColor($color);
         }
 

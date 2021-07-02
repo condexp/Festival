@@ -16,30 +16,15 @@ class ClientController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        //  if ($this->getUser()) {
-        //  prevoir recuperation de la
-        //  la valeur de l'attribut email du client  connecter
-        //  $emailclientconnecter=$this->
-        //  Traitement email du client
-        // }else 
-        //  prevoir un traitement dans le submitted
-        //
-
         $client = new Lesclients();
         $form = $this->createForm(ClientType::class, $client);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $em = $this->getDoctrine()->getManager();
-
             $em->persist($client);
             $em->flush();
-
             return $this->redirectToRoute('app_home');
         }
-
-
         return $this->render('billeterie/billeterie.html.twig', [
             'info_reservation' => 'Fiche de reservation client ',
             'clientForm' => $form->createView()

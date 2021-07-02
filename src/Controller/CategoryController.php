@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoryController extends AbstractController
 {
+    // fonctionnalité non utilisée
+
     /**
      * @Route("/category", name="app_category")
      */
