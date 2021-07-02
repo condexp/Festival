@@ -13,7 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArtistesController extends AbstractController
 {
 
-
     /**
      * @Route("/artistes", name="app_artistes")
      */
@@ -57,12 +56,11 @@ class ArtistesController extends AbstractController
         ]);
     }
 
-
     // Traitement Requete de sql de selection des artistes par category
     /**
      * @Route("/artist/category/{id}", methods={"GET"}, name="app_artist_category")
      */
-    public function listArtisteByCategory($id, CategoryRepository $categoryRepository, ArtistRepository $artistRepository): Response
+    public function listArtisteByCategory($id, CategoryRepository $categoryRepository): Response
     {
 
         $categorycolor = [
@@ -78,9 +76,6 @@ class ArtistesController extends AbstractController
 
         foreach ($categories as $categorie) {
             $categorie->setColor($categorycolor[$categorie->getName()]);
-
-            //dd($categorie);
-
         }
 
         $artistbyCategory = $this->getDoctrine()->getRepository(Artist::class)->findBy(['category' => $id]);
@@ -118,10 +113,6 @@ class ArtistesController extends AbstractController
             null => 'dark',
         ];
         $artist->setColor($categorycolor[$artist->getCategory()->getName()]);
-
-
-
-
 
         //dd($posts);
         return $this->render('artistes/view.html.twig', [
