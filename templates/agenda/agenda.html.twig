@@ -4,46 +4,52 @@
 {% endblock %}
 
 {% block body %}
-<style>
-	.example-wrapper {
-		margin: 1em auto;
-		max-width: 800px;
-		width: 95%;
-		font: 18px / 1.5 sans-serif;
-	}
-	.example-wrapper code {
-		background: #F5F5F5;
-		padding: 2px 6px;
-	}
-</style>
+	<style>
+		.example-wrapper {
+			margin: 1em auto;
+			max-width: 800px;
+			width: 95%;
+			font: 18px / 1.5 sans-serif;
+		}
+		.example-wrapper code {
+			background: #F5F5F5;
+			padding: 2px 6px;
+		}
+	</style>
 
-<div class="example-wrapper">
+	<div class="example-wrapper">
 
-	<table class="table table-hover">
-		<thead>
-			<tr class="table-success" style="border: 1px solid white" hidden>
-				<th scope="col">Date</th>
-				<th scope="col">Plage Horaire</th>
-				<th scope="col">Nom Artistes</th>
-				<th scope="col" class="table-primary">Réservations</th>
-			</tr>
-		</thead>
-		{%  for artistconcert in lesconcerts %}
-			<tbody>
-
-				<tr class="table-active" style="border: 1px solid white">
-					<th scope="row">{{ artistconcert.dateconcert }}</th>
-					<td>{{ artistconcert.plagehoraire }}</td>
-					<td>{{ artistconcert.name }}
-					</td>
-					<td class="table-primary" style="text-align:center">
-						{% if app.user %}
-							<a href="#" class="card-link">Reservez une place</a>
-						{% endif %}
-					</td>
+		<table class="table table-hover">
+			<thead>
+				<tr class="table-success" style="border: 1px solid white" hidden>
+					<th scope="col">Date</th>
+					<th scope="col">Plage Horaire</th>
+					<th scope="col">Nom Artistes</th>
+					<th scope="col" class="table-primary">Réservations</th>
+					<th scope="col" class="table-primary">Réservations</th>
 				</tr>
-			</tbody>
-		</td>
-	</tr>
+			</thead>
+			{%  for artistconcert in lesconcerts %}
+				<tbody>
 
-</tbody>{% endfor %}</table></div>{% endblock %}
+					<tr class="table-active" style="border: 1px solid white">
+						<th scope="row">{{ artistconcert.dateconcert }}</th>
+						<td>{{ artistconcert.plagehoraire }}</td>
+						<td>{{ artistconcert.name }}
+						</td>
+						{% if app.user %}
+							<td class="table-active" style="text-align:center">
+								<a href="{{ path('app_client_billeterie') }}" class="card-link">Reservez une place</a>
+							</td>
+
+						{% else %}
+							<td class="table-active" style="text-align:center">
+								<a href="{{ path('app_client_billeterie') }}" class="card-link">Reservez une place</a>
+							{% endif %}
+						</td>
+					</tr>
+				</tbody>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}
